@@ -3,14 +3,14 @@
 	xmlns:camel="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 	<!-- Define a traditional camel context here -->
-	<bean class="org.everythingjboss.ProductAggregationStrategy" id="aggregatorStrategy" />
-	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"
-		streamCache="true">
+	<bean class="org.everythingjboss.services.ProductAggregationStrategy" id="aggregatorStrategy" />
+	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring" streamCache="true">
 		<dataFormats>
 			<jaxb contextPath="org.everythingjboss.inventory" id="inventory" />
 		</dataFormats>
-		<restConfiguration apiContextPath="/api-doc"
-			bindingMode="off" component="servlet" contextPath="/api" enableCORS="true">
+		<restConfiguration apiContextPath="/api-doc" bindingMode="off"
+			component="servlet" contextPath="/api"
+			enableCORS="true" >
 			<dataFormatProperty key="prettyPrint" value="true" />
 			<apiProperty key="api.version" value="1.0.0" />
 			<apiProperty key="api.title" value="Service 1 REST API" />
@@ -19,9 +19,9 @@
 			<apiProperty key="api.contact.name" value="Red Hat" />
 		</restConfiguration>
 		<rest path="/update">
-			<post consumes="application/xml">
+			<post consumes="application/xml" >
 				<param description="Inventory XML" name="body" required="true"
-					type="body" />
+					type="body"/>
 				<to uri="direct:message" />
 			</post>
 		</rest>
@@ -35,8 +35,7 @@
 				<setHeader headerName="JMSType">
 					<simple>${body.type}</simple>
 				</setHeader>
-				<to
-					uri="amq:topic:priceUpdateRequestQueue?timeToLive=300000&amp;disableReplyTo=true" />
+				<to uri="amq:topic:priceUpdateRequestQueue?timeToLive=300000&amp;disableReplyTo=true" />
 			</split>
 		</route>
 		<route>
