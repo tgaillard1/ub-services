@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:camel="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<bean id="priceUpdateProcessor" class="org.everythingjboss.PriceUpdateProcessor" />
+
+	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+		<route id="_route1">
+			<from id="_from1"
+				uri="amq:topic:priceUpdateRequestQueue?concurrentConsumers=1&amp;maxConcurrentConsumers=1&amp;clientId={{clientId}}&amp;durableSubscriptionName={{durableSubscriptionName}}&amp;selector=JMSType='{{JMSType}}'" />
+			<log id="_log1"
+				message="Received product of type {{JMSType}} with name : ${body.name}" />
+			<process ref="priceUpdateProcessor" />
+			<to id="_to1" uri="amq:queue:priceUpdateResponseQueue" />
+		</route>
+	</camelContext>
+</beans>

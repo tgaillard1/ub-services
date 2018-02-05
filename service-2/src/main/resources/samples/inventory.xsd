@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://everythingjboss.org/inventory"
+	xmlns:tns="http://everythingjboss.org/inventory" elementFormDefault="qualified">
+
+	<element name="inventory">
+		<complexType>
+			<sequence>
+				<element name="product" type="tns:product" maxOccurs="unbounded"
+					minOccurs="1" />
+			</sequence>
+		</complexType>
+	</element>
+
+	<complexType name="product">
+		<sequence>
+			<element name="name" type="string" />
+			<element name="type" type="tns:type" />
+			<element name="price" type="string" />
+		</sequence>
+	</complexType>
+
+	<simpleType name="type">
+		<restriction base="string">
+			<enumeration value="type-2" />
+			<enumeration value="type-3" />
+		</restriction>
+	</simpleType>
+</schema>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:inventory xmlns:tns="http://everythingjboss.org/inventory"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://everythingjboss.org/inventory inventory.xsd ">
+	<tns:product>
+		<tns:name>A</tns:name>
+		<tns:type>type-2</tns:type>
+		<tns:price></tns:price>
+	</tns:product>
+	<tns:product>
+		<tns:name>B</tns:name>
+		<tns:type>type-3</tns:type>
+		<tns:price></tns:price>
+	</tns:product>
+	<tns:product>
+		<tns:name>C</tns:name>
+		<tns:type>type-2</tns:type>
+		<tns:price></tns:price>
+	</tns:product>
+	<tns:product>
+		<tns:name>D</tns:name>
+		<tns:type>type-3</tns:type>
+		<tns:price></tns:price>
+	</tns:product>
+</tns:inventory>
